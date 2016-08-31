@@ -22,6 +22,6 @@ class DirectoryAnalyser
   end
 
   def file_paths
-    Dir[ directory ].select { |thing| File.file? thing }
+    @file_paths ||= Dir[ directory ].select { |thing| File.file? thing }
   end
 end
