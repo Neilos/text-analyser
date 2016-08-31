@@ -30,3 +30,14 @@ To run the tests, in your terminal, from the root of this directory, execute the
   b) Move any existing files in the directory 'files_to_analyse/' to avoid overwriting.
   c) Run the command `ruby ./scripts/scrape_text.rb`
 
+### 3. To analyse a directory of text files...
+
+  a) Clear/move any files in the directory 'files_to_analyse/' that you **don't** want to include in the analysis.
+  b) Run the command `ruby ./scripts/analyse_directory.rb analysis_method`, where the `analysis_method` can be any of the following:
+    * 'adjective_counts'
+    * 'noun_phrase_counts'
+    * 'scored_keywords'
+    * 'scored_adjectives'
+    * 'scored_noun_phrases'
+
+
