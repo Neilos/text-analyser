@@ -13,14 +13,28 @@ class DirectoryAnalyser
     @directory = directory
   end
 
-  def text
-    @text ||= Text.new(text_string)
+  def analyse(method)
+    results_for(method).reduce { |memo, method_output|
+      memo.merge(method_output) { |string, score_1, score_2|
+        score_1 + score_2
+      }
+    }
   end
 
-  def text_string
-    @text_string ||= file_paths.reduce('') do |string, file_path|
-      string << TextFileReader.new(file_path).text << ' '
-    end
+  private
+
+  def results_for(method)
+    texts.map { |text| text.send(method) }
+  end
+
+  def texts
+    @texts ||= text_strings.map{ |text_string| Text.new(text_string) }
+  end
+
+  def text_strings
+    @text_strings ||= file_paths.map { |file_path|
+      TextFileReader.new(file_path).text
+    }
   end
 
   def file_paths

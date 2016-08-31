@@ -7,6 +7,6 @@ describe TextFileReader do
 
   describe 'text' do
     subject { text_file_reader.text }
-    it { is_expected.to eq('this is a test file with multiple lines.') }
+    it { is_expected.to eq('this is a test file with multiple lines. Typesetting is essentially unchanged.') }
   end
 end
