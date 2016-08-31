@@ -1,5 +1,5 @@
-require 'text'
-require 'text_file_reader'
+require_relative 'text'
+require_relative 'text_file_reader'
 
 class DirectoryAnalyser
 
