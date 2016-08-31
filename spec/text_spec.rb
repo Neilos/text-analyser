@@ -42,4 +42,20 @@ describe Text do
     subject { text.adjectives }
     it { is_expected.to eq(expected_adjectives) }
   end
+
+  describe 'noun_phrases' do
+    let(:string) { "Alice chased the big fat cat." }
+    let(:expected_noun_phrases) {
+      { "Alice"=>1, "cat"=>1, "fat cat"=>1, "big fat cat"=>1 }
+    }
+
+    before do
+      allow(grammar_analyser).to receive(:get_words)
+        .with(string)
+        .and_return(expected_noun_phrases)
+    end
+
+    subject { text.noun_phrases }
+    it { is_expected.to eq(expected_noun_phrases) }
+  end
 end

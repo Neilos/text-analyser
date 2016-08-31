@@ -16,6 +16,9 @@ class Text
     grammar_analyser.get_adjectives(tagged_string)
   end
 
+  def noun_phrases
+    grammar_analyser.get_words(string)
+  end
 
   def scored_keywords
     Hash[keyword_scorer.run(string)]
