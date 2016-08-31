@@ -1,3 +1,4 @@
+require 'text'
 require 'text_file_reader'
 
 class DirectoryAnalyser
@@ -8,6 +9,10 @@ class DirectoryAnalyser
     raise ArgumentError, 'directory must not be empty' if directory.empty?
 
     @directory = directory
+  end
+
+  def text
+    @text ||= Text.new(text_string)
   end
 
   def text_string
