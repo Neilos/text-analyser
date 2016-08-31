@@ -13,11 +13,13 @@ class Text
   end
 
   def adjective_counts
-    downcase_keys(grammar_analyser.get_adjectives(tagged_string))
+    @adjective_counts ||= downcase_keys(
+      grammar_analyser.get_adjectives(tagged_string)
+    )
   end
 
   def noun_phrase_counts
-    downcase_keys(grammar_analyser.get_words(string))
+    @noun_phrase_counts ||= downcase_keys(grammar_analyser.get_words(string))
   end
 
   def scored_keywords
@@ -25,11 +27,11 @@ class Text
   end
 
   def scored_adjectives
-    convert_to_scored(adjective_counts)
+    @scored_adjectives ||= convert_to_scored(adjective_counts)
   end
 
   def scored_noun_phrases
-    convert_to_scored(noun_phrase_counts)
+    @scored_noun_phrases ||= convert_to_scored(noun_phrase_counts)
   end
 
   def to_s
