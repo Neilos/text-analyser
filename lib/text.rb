@@ -24,10 +24,12 @@ class Text
     @scored_keywords ||= Hash[keyword_scorer.run(string)]
   end
 
+  def scored_adjectives
+    convert_to_scored(adjectives)
+  end
+
   def scored_noun_phrases
-    noun_phrases.each_with_object({}) { |(phrase, count), scored|
-      scored[phrase] = count > 0 ? score(phrase) : 0
-    }
+    convert_to_scored(noun_phrases)
   end
 
   def to_s
@@ -44,6 +46,12 @@ class Text
     string
       .split(/\W+/)
       .reduce(0) { |sum, word| sum + scored_keywords.fetch(word, 0) }
+  end
+
+  def convert_to_scored(hash)
+    hash.each_with_object({}) { |(words, count), scored|
+      scored[words] = count > 0 ? score(words) : 0
+    }
   end
 
   def tagged_string
