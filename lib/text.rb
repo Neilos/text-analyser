@@ -42,15 +42,17 @@ class Text
     Hash[hash.map { |key, value| [key.downcase, value] }]
   end
 
-  def score(string)
-    string
+  def score_string_of(words)
+    words
       .split(/\W+/)
-      .reduce(0) { |sum, word| sum + scored_keywords.fetch(word, 0) }
+      .reduce(0) { |sum, word|
+        sum + scored_keywords.fetch(word, 0)
+      }
   end
 
   def convert_to_scored(hash)
     hash.each_with_object({}) { |(words, count), scored|
-      scored[words] = count > 0 ? score(words) : 0
+      scored[words] = count > 0 ? score_string_of(words) : 0
     }
   end
 
