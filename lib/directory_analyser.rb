@@ -6,7 +6,9 @@ class DirectoryAnalyser
   attr_reader :directory
 
   def initialize(directory)
-    raise ArgumentError, 'directory must not be empty' if directory.empty?
+    if directory.nil? || directory.empty?
+      raise ArgumentError, 'directory must not be empty'
+    end
 
     @directory = directory
   end
