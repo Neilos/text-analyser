@@ -1,9 +1,19 @@
+require 'engtagger'
 require 'graph-rank'
 
 class Text
-  def initialize(string, keyword_scorer = GraphRank::Keywords.new)
+  def initialize(
+      string,
+      keyword_scorer = GraphRank::Keywords.new,
+      grammar_analyser = EngTagger.new
+    )
     @string = string
     @keyword_scorer = keyword_scorer
+    @grammar_analyser = grammar_analyser
+  end
+
+  def adjectives
+    grammar_analyser.get_adjectives(tagged_string)
   end
 
 
@@ -17,5 +27,9 @@ class Text
 
   private
 
-  attr_reader :string, :keyword_scorer
+  def tagged_string
+    @tagged_string ||= grammar_analyser.add_tags(string)
+  end
+
+  attr_reader :string, :keyword_scorer, :grammar_analyser
 end
