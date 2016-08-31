@@ -24,11 +24,11 @@ describe Text do
     it { is_expected.to eq({"text" => 3.7, "analyse" => 4.5}) }
   end
 
-  describe 'adjectives' do
+  describe 'adjective_counts' do
     let(:string) { "Alice chased the Big fat cat." }
     let(:tagged_string) { "<nnp>Alice</nnp> <vbd>chased</vbd> <det>the</det> <jj>Big</jj> <jj>fat</jj><nn>cat</nn> <pp>.</pp>" }
-    let(:adjectives) { { "Big"=>1, "fat"=>1 } }
-    let(:expected_adjectives) { { "big"=>1, "fat"=>1 } }
+    let(:adjective_counts) { { "Big"=>1, "fat"=>1 } }
+    let(:expected_adjective_counts) { { "big"=>1, "fat"=>1 } }
 
     before do
       allow(grammar_analyser).to receive(:add_tags)
@@ -37,32 +37,32 @@ describe Text do
 
       allow(grammar_analyser).to receive(:get_adjectives)
         .with(tagged_string)
-        .and_return(adjectives)
+        .and_return(adjective_counts)
     end
 
-    subject { text.adjectives }
-    it { is_expected.to eq(expected_adjectives) }
+    subject { text.adjective_counts }
+    it { is_expected.to eq(expected_adjective_counts) }
   end
 
-  describe 'noun_phrases' do
+  describe 'noun_phrases_counts' do
     let(:string) { "Alice chased the big fat cat." }
-    let(:noun_phrases) {
+    let(:noun_phrase_counts) {
       { "Alice"=>1, "cat"=>1, "fat cat"=>1, "big fat cat"=>1 }
     }
-    let(:expected_noun_phrases) {
+    let(:expected_noun_phrase_counts) {
       { "alice"=>1, "cat"=>1, "fat cat"=>1, "big fat cat"=>1 }
     }
 
     before do
       allow(grammar_analyser).to receive(:get_words).with(string)
-        .and_return(noun_phrases)
+        .and_return(noun_phrase_counts)
     end
 
-    subject { text.noun_phrases }
-    it { is_expected.to eq(expected_noun_phrases) }
+    subject { text.noun_phrase_counts }
+    it { is_expected.to eq(expected_noun_phrase_counts) }
   end
 
-  describe 'scored_noun_phrases' do
+  describe '#scored_noun_phrases' do
     let(:string) { "Alice chased the big fat cat." }
     let(:noun_phrases) {
       { "Alice"=>1, "cat"=>1, "fat cat"=>1, "big fat cat"=>1 }
@@ -92,7 +92,7 @@ describe Text do
     it { is_expected.to eq(expected) }
   end
 
-  describe 'scored_adjectives' do
+  describe '#scored_adjectives' do
     let(:string) { "Alice chased the Big fat cat." }
     let(:tagged_string) { "<nnp>Alice</nnp> <vbd>chased</vbd> <det>the</det> <jj>Big</jj> <jj>fat</jj><nn>cat</nn> <pp>.</pp>" }
     let(:adjectives) { { "Big"=>1, "fat"=>1 } }

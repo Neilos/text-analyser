@@ -12,11 +12,11 @@ class Text
     @grammar_analyser = grammar_analyser
   end
 
-  def adjectives
+  def adjective_counts
     downcase_keys(grammar_analyser.get_adjectives(tagged_string))
   end
 
-  def noun_phrases
+  def noun_phrase_counts
     downcase_keys(grammar_analyser.get_words(string))
   end
 
@@ -25,11 +25,11 @@ class Text
   end
 
   def scored_adjectives
-    convert_to_scored(adjectives)
+    convert_to_scored(adjective_counts)
   end
 
   def scored_noun_phrases
-    convert_to_scored(noun_phrases)
+    convert_to_scored(noun_phrase_counts)
   end
 
   def to_s
