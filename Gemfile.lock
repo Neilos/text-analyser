@@ -3,6 +3,7 @@ GEM
   specs:
     byebug (9.0.5)
     diff-lcs (1.2.5)
+    graph-rank (0.0.3)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -22,6 +23,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  graph-rank
   rspec
   rspec-mocks
 
