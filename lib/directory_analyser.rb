@@ -1,3 +1,5 @@
+require 'text_file_reader'
+
 class DirectoryAnalyser
 
   attr_reader :directory
@@ -6,6 +8,12 @@ class DirectoryAnalyser
     raise ArgumentError, 'directory must not be empty' if directory.empty?
 
     @directory = directory
+  end
+
+  def text_string
+    @text_string ||= file_paths.reduce('') do |string, file_path|
+      string << TextFileReader.new(file_path).text << ' '
+    end
   end
 
   def file_paths

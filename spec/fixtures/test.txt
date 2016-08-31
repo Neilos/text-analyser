@@ -1,2 +1,2 @@
 this is a test file
-with multiple lines
+with multiple lines.
